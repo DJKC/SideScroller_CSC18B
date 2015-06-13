@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+
+
+import Entity.VGS;
+import Entity.VGSEmoji;
 //import org.json.JSONObject;
 import overlays.Debugger;
 
@@ -15,6 +19,8 @@ import socket.SMSocket;
 import tileMap.TileMap;
 
 public class Player extends MapObject{
+	//KC
+	protected VGSEmoji emoji;
 	
 	// player stuff
 	private int health;
@@ -91,6 +97,9 @@ public class Player extends MapObject{
 //		scratchRange = 40;
 		
 		
+		//KC
+		emoji = new VGSEmoji();
+		
 		// load sprites
 		try {
 			// Load the player sprite
@@ -127,6 +136,8 @@ public class Player extends MapObject{
 		animation.setFrames(sprites.get(IDLE));
 		animation.setDelay(400);
 		
+		//KC
+		setEmptyEmoji();
 	}
 	
 	public int getHealth() { return health; }
@@ -229,6 +240,9 @@ public class Player extends MapObject{
 	}
 	
 	public void update() {
+		//KC
+		emoji.update();
+		image = emoji.getImage();
 		// update position
 		getNextPosition();
 		checkTileMapCollision();
@@ -362,6 +376,12 @@ public class Player extends MapObject{
 			}
 		}
 		
+		//KC
+		g.drawImage(image,
+				(int)(x + xmap - width / 2),
+				(int)(y + ymap - height / 2) - 30,
+				null);
+		
 		if(facingRight) {
 			g.drawImage(
 				animation.getImage(),
@@ -382,5 +402,38 @@ public class Player extends MapObject{
 			
 		}
 		
+	}
+	
+	//KC
+	private void setEmoji(int r, int c){
+		emoji.setImage(r, c);
+	}
+	
+	//KC
+	public void setCommand(String command){
+		if(command != null){
+			//command = lastCommand[secondCommand.indexOf(currentCommand.charAt(1))];
+			int secondIndex = VGS.secondCommand.indexOf(command.charAt(1));
+			int thirdIndex = VGS.lastCommand[secondIndex].indexOf(command.charAt(2));
+			
+			System.out.printf("\ni: %d, i: %d\n", secondIndex, thirdIndex);
+			
+			setEmoji(secondIndex, thirdIndex);
+			image = emoji.getImage();
+			emoji.setEmojiSet(true);
+		}
+		
+		else{
+			//System.out.println("\nNULL BITCH");
+			setEmptyEmoji();
+			emoji.setEmojiSet(false);
+		}
+	}
+	
+	//KC
+	public void setEmptyEmoji(){
+		setEmoji(3, 0);
+		image = emoji.getImage();
+		emoji.setEmojiSet(false);
 	}
 }

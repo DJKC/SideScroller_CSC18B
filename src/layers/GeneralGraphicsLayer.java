@@ -8,14 +8,15 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 
+
 //import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import src.appstate.AppStateManager;
 import core.LayeredPanel;
 import core.Passport;
 //import socket.SMSocket;
-import appstate.AppStateManager;
 
 
 /* 

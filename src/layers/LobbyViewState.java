@@ -20,7 +20,7 @@ import javax.swing.ScrollPaneConstants;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import appstate.AppStateManager;
+import src.appstate.AppStateManager;
 import net.miginfocom.swing.MigLayout;
 import models.LobbyModel;
 import core.LayeredPanel;

@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;

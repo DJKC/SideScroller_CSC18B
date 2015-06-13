@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 public abstract class AppState {
 	

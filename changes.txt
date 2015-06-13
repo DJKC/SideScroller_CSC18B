@@ -1,0 +1,57 @@
+			THESE ARE LINES THAT IVE ADDED, THEY ARE ALREADY INTEGRATED INTO YOUR FILES
+
+GAMESTATE.JAVA
+line 25: 		static public VGS vgs;
+line 79: 		vgs = new VGS();
+line 133/134: 		//update vgs / gs.update();
+line 191: 		vgs.draw(g);
+line 323: 		checkVGS(k);
+line 327/336:		public void checkVGS(int k){
+				if(!vgs.isGameKey(k)){
+					if(vgs.buildCommand(k) == null){
+						player.setCommand(null);
+					}
+			
+					else{
+						player.setCommand(vgs.getCommand());
+					}
+				}
+------------------------------------------------------------------------------------------------
+COPIED VGS.java && VGSEmoji.java into folder for Package entity
+------------------------------------------------------------------------------------------------
+PLAYER.JAVA
+line 23:		protected VGSEmoji emoji;
+line 101:		emoji = new VGSEmoji();
+line 140:		setEmptyEmoji();
+line 124/125:		emoji.update();	/ image = emoji.getImage();
+line 380/383:		g.drawImage(image,
+				(int)(x + xmap - width / 2),
+				(int)(y + ymap - height / 2) - 30,
+				null);
+line 408/410:			private void setEmoji(int r, int c){
+					emoji.setImage(r, c);
+				}
+line 413/431:		public void setCommand(String command){
+				if(command != null){
+					//command = lastCommand[secondCommand.indexOf(currentCommand.charAt(1))];
+					int secondIndex = VGS.secondCommand.indexOf(command.charAt(1));
+					int thirdIndex = VGS.lastCommand[secondIndex].indexOf(command.charAt(2));
+			
+					System.out.printf("\ni: %d, i: %d\n", secondIndex, thirdIndex);
+			
+					setEmoji(secondIndex, thirdIndex);
+					image = emoji.getImage();
+					emoji.setEmojiSet(true);
+				}
+		
+				else{
+					//System.out.println("\nNULL BITCH");
+					setEmptyEmoji();
+					emoji.setEmojiSet(false);
+				}
+			}
+line 434/438:			public void setEmptyEmoji(){
+					setEmoji(3, 0);
+					image = emoji.getImage();
+					emoji.setEmojiSet(false);
+				}

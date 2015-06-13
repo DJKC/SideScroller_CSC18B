@@ -1,7 +1,7 @@
 package socket;
 
-import appstate.CharacterSelectState;
-import appstate.GameState;
+import src.appstate.CharacterSelectState;
+import src.appstate.GameState;
 
 
 public class SocketController {

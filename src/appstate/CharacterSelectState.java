@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

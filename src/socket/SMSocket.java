@@ -9,15 +9,18 @@ import java.net.URISyntaxException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 //import org.json.*;
 //import org.json.simple.*;
 //import org.json.simple.parser.JSONParser;
 import java.util.Iterator;
+
 import org.joda.time.DateTime;
+
 import overlays.Debugger;
-import appstate.CharacterSelectState;
+import src.appstate.CharacterSelectState;
+import src.appstate.GameState;
 //import appstate.AppState;
-import appstate.GameState;
 import core.Passport;
 
 //import layers.GeneralGraphicsLayer;

@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 
 import java.awt.Font;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.ListIterator;
 import java.util.Random;
 
+import Entity.VGS;
 import core.Passport;
 import overlays.Debugger;
 import socket.SocketController;
@@ -21,6 +22,9 @@ import layers.GeneralGraphicsLayer;
 
 public class GameState extends AppState{
 		
+	//KC
+	static public VGS vgs;
+	
 	/* CORE */
 	private AppStateManager asm;
 	private GeneralGraphicsLayer gLayer;
@@ -71,6 +75,8 @@ public class GameState extends AppState{
 	}
 	/* Init runs when this application state is set */
 	public void init(){
+		//KC
+		vgs = new VGS();
 		
 		int style = Font.PLAIN;
 		standard = new Font ("Arial", style , 12);
@@ -123,6 +129,10 @@ public class GameState extends AppState{
 	public void update(){
 		/* HACK: If player is not setup yet, don't update */
 		if(player != null){
+			//KC
+			//update vgs
+			vgs.update();
+			
 			if(statScreen.getState() != StatScreen.DEATH){
 				player.update();				
 			}else{
@@ -177,6 +187,8 @@ public class GameState extends AppState{
 		/*TODO: delete this function from abstract */
 	};
 	public void drawToScreen(java.awt.Graphics2D g){
+		//KC
+		vgs.draw(g);
 		g.setFont(standard);
 		bg.draw(g);
 		tileMap.draw(g);
@@ -306,7 +318,24 @@ public class GameState extends AppState{
 		if(k == KeyEvent.VK_E) player.setGliding(true);
 		if(k == KeyEvent.VK_R) player.setScratching();
 		if(k == KeyEvent.VK_F) player.setFiring();
+	
+		//KC
+		checkVGS(k);
 	};
+	
+	//KC
+	public void checkVGS(int k){
+		if(!vgs.isGameKey(k)){
+			if(vgs.buildCommand(k) == null){
+				player.setCommand(null);
+			}
+			
+			else{
+				player.setCommand(vgs.getCommand());
+			}
+		}
+	}
+	
 	public void keyReleased(int k){
 		if(k == KeyEvent.VK_LEFT){
 			player.setLeft(false);

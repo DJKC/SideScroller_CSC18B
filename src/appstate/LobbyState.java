@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 import java.awt.Color;
 import java.awt.Font;

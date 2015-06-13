@@ -1,4 +1,4 @@
-package appstate;
+package src.appstate;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
